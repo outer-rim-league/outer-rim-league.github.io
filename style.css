@@ -1,0 +1,46 @@
+html, body {
+	background-image:url('background.png');
+	color: rgb(255, 204, 0);
+	font-family: "Arial", Arial, serif;
+	font-weight: bold;
+	font-size:1em;
+	line-height: 1.7em;
+	}
+h1 {
+  font-family: "star_jediregular", Arial, serif;
+  color: rgb(255, 204, 0);
+}
+aasd {
+  font-family: "star_jediregular", Arial, serif;
+  color: rgb(255, 204, 0);
+}
+
+#top a {
+  font-family: "star_jediregular", Arial, serif;
+  color: rgb(255, 204, 0);
+}
+
+#top a:visited {
+  font-family: "star_jediregular", Arial, serif;
+  color: rgb(255, 204, 0);
+}
+
+
+#bot a {
+	font-family: "Arial", Arial, serif;
+}
+
+#bot a:visited {
+  font-family: "star_jediregular", Arial, serif;
+  color: rgb(255, 204, 0);
+}
+
+	
+@font-face {
+    font-family: 'star_jediregular';
+    src: url('starjedi-webfont.woff2') format('woff2'),
+         url('starjedi-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+
+}
