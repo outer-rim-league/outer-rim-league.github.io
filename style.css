@@ -1,5 +1,7 @@
 html, body {
 	background-image:url('background.png');
+	background-repeat: no-repeat;
+	background-color: black;
 	color: rgb(255, 204, 0);
 	font-family: "Arial", Arial, serif;
 	font-weight: bold;
