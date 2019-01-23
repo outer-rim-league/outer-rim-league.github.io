@@ -17,22 +17,22 @@ aasd {
 
 #top a {
   font-family: "star_jediregular", Arial, serif;
-  color: rgb(255, 204, 0);
+  color: rgb(38, 128, 255);
 }
 
 #top a:visited {
   font-family: "star_jediregular", Arial, serif;
-  color: rgb(255, 204, 0);
+  color: rgb(38, 128, 255);
 }
-
 
 #bot a {
 	font-family: "Arial", Arial, serif;
+	color: rgb(38, 128, 255);
 }
 
 #bot a:visited {
   font-family: "star_jediregular", Arial, serif;
-  color: rgb(255, 204, 0);
+  color: rgb(38, 128, 255);
 }
 
 	
