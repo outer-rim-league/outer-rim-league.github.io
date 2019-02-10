@@ -1,19 +1,22 @@
-Name	Notoriety	Games	Opponents
-Jeff M	1031	2	2
-Charles W	1025	2	2
-Stephen M	1023	4	3
-Dave L	1020	1	1
-Trent G	1016	3	3
-Trog M	1009	1	1
-Joe L	1007	4	4
-Nait P	1005	2	2
-Carlos	1000	1	1
-Jonathan B	1000	1	1
-Juan B	1000	1	1
-Aaron M	998	4	2
-Micheal S	993	2	2
-Trevor C	993	2	2
-Charlie	992	1	1
-John K	974	1	1
-Nick S	969	4	2
-Kevin CM	938	4	3
+Name	Notoriety	Change	Games	Opponents
+Jeff M	1032	0	2	2
+Stephen M	1030	6	5	3
+Charles W	1025	0	2	2
+Aaron M	1022	23	6	4
+Dave L	1020	0	1	1
+Trevor C	1020	26	4	3
+Trog M	1009	0	1	1
+Richard S	1008	8	1	1
+Trent G	1005	-10	4	3
+Carlos	1000	0	1	1
+Jonathan B	1000	0	1	1
+Juan B	1000	0	1	1
+Michael S	995	-4	2	2
+Charlie	993	0	1	1
+Micheal S	993	0	2	2
+Martin B	991	-8	1	1
+Nait P	991	-12	3	3
+Joe L	984	-22	6	6
+John K	974	0	1	1
+Nick S	969	0	4	2
+Kevin CM	932	-6	5	3

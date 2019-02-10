@@ -22,20 +22,22 @@ def main():
 def rank():
     mwl = wantedList
 
-    for week_num in [1,2]:
+    week_nums = list(set(mwl.df['Week Played'].values))
+
+    for week_num in week_nums:
 
         # mwl.report_ranks()
 
         print rsf('-- Week ~week_num --')
 
 
-        math_row_tpl = '~p1-12 ~p2-12 ~destr1-8 ~destr2-8 ~score1-8 ~score2-8 ~r1-15 ~r2-15'
+        match_row_tpl = '~p1-12 ~p2-12 ~destr1-8 ~destr2-8 ~score1-8 ~score2-8 ~r1-15 ~r2-15'
 
 
         game_nums = mwl.iter_init(week_num)
 
 
-        iterMax = 9
+        iterMax = 999
         for iter in np.arange(1,9,dtype=int):
         # for iter in range(iterMax):
             iter = int(iter)
@@ -46,7 +48,7 @@ def rank():
             if iter_print:
                 print rsf('\nRandom order #{iter}:')
                 p1, p2, destr1, destr2, score1, score2, r1, r2  = 'Player 1', 'Player 2', 'Destr 1', 'Destr 2', 'Score 1', 'Score 2', 'Rank 1', 'Rank 2'
-                print  rsf(math_row_tpl)
+                print  rsf(match_row_tpl)
 
             mwl.iter_add()
             game_nums_randSort = np.random.permutation(game_nums)
@@ -86,7 +88,7 @@ def rank():
                 r1 = rsf('~pr1-4 > ~r1')
                 r2 = rsf('~pr2-4 > ~r2')
                 if iter_print:
-                    print  rsf(math_row_tpl)
+                    print  rsf(match_row_tpl)
 
             mwl.iter_rank()
 
@@ -128,7 +130,7 @@ class Player():
         num_opps = len(self.opps)
         num_games = len(self.games)
 
-        return [self.name, rating, num_games, num_opps]
+        return [self.name, rating, self.rating_delta, num_games, num_opps]
         # print rsf('{self.name}-12 {rating}-8 {num_opps}-8')
 
 
@@ -167,26 +169,32 @@ class WantedList():
         week_game_nums = self.df[self.df['Week Played'] == week_num].index.values
         return week_game_nums
 
+    def get_player(self, name):
+        for player in self.players:
+            if name == player.name:
+                return player
+            _=0
+
     def get_iter_rank(self, player):
         return self.iterElo.getPlayerRating(player)
 
     def report_ranks(self):
 
-        tpl= '{name}-12 {rating}-12 {games}-8 {opps}-8'
+        tpl= '{name}-12 {rating}-12 {delta}-12 {games}-8 {opps}-8 '
 
-        name, rating, games, opps = 'Name', 'Notoriety', 'Games', 'Opponents'
-        f_writeline('./ranks.tab','\t'.join([name, rating, games, opps]))
+        name, rating, delta, games, opps = 'Name', 'Notoriety', 'Change', 'Games', 'Opponents'
+        f_writeline('./ranks.tab','\t'.join([name, rating, delta, games, opps]))
 
         print rsf(tpl)
         reports = [player.report() for player in self.players]
 
         reports = sorted(reports, key=lambda x:int(x[1])*-1)
 
-        for name, rating, games, opps in reports:
+        for name, rating, delta, games, opps in reports:
 
         # for player in self.elo.players:
         #     rating = int(player.rating)
-            row = [str(x) for x in [name, rating, games, opps]]
+            row = [str(x) for x in [name, rating, delta, games, opps]]
             f_addline('./ranks.tab', '\t'.join(row))
             print rsf(tpl)
 
@@ -227,17 +235,20 @@ class WantedList():
     def iter_finalize(self):
         '''ran at the conclusion of each week'''
 
-        new_rank = OrderedDict()
+        new_ratings = OrderedDict()
         for iterDict in self.iterDicts:
             for name in iterDict:
-                if name not in new_rank:
-                    new_rank[name] = []
+                if name not in new_ratings:
+                    new_ratings[name] = []
 
-                new_rank[name].append(iterDict[name])
+                new_ratings[name].append(iterDict[name])
 
-        for name, ranks in new_rank.items():
+        for name, ranks in new_ratings.items():
             player = self.elo.getPlayer(name)
-            player.rating = np.mean(ranks)
+            new_rating = np.mean(ranks)
+            old_rating = player.rating
+            self.get_player(name).rating_delta = int(new_rating - old_rating)
+            player.rating = new_rating
 
             _=0
 
